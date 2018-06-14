@@ -1,24 +1,7 @@
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import pandas as pd
-import pymongo
-
-
-def init_mongod():
-    """Initialize MongoDB db services
-    returns: Mongod instance
-    """
-    conn = 'mongodb://localhost:27017'
-    return pymongo.MongoClient(conn)
-
-
-def define_mongo_db(client):
-    """set up default mongo database
-    requires: mongo client connection
-    returns: mongod database and mars collection
-    """
-    db = client.mars_db
-    return db.mars
+from collections import OrderedDict
 
 
 def init_browser():
@@ -92,15 +75,15 @@ def mars_hemisphere_images():
 
 
 def scrape():
-    client = init_mongod()
-    client.mars_db.mars.drop()
-    collection = define_mongo_db(client)
     news_title, news_p = mars_news()
-    collection.insert_one({"news_title": news_title, "news_p": news_p})
-    collection.insert_one({"featured_image_url": mars_space_image()})
-    collection.insert_one({"mars_weather": mars_weather_tweet()})
-    collection.insert_one({"mars_facts": mars_facts()})
-    collection.insert_one({"mars_hemisphere_images": mars_hemisphere_images()})
+    return {
+        'news_title': news_title,
+        'news_p': news_p,
+        'featured_image_url': mars_space_image(),
+        'mars_weather': mars_weather_tweet(),
+        'mars_facts': mars_facts(),
+        'hemisphere_image_urls': mars_hemisphere_images()
+    }
 
 
 if __name__ == '__main__':

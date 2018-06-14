@@ -25,21 +25,24 @@
         <div class="row" id="more-mars-cruft">
             <div class="col-md-6">
                 <h2>Featured Mars Image</h2>
-                <img src="{{featured_image_url}}" alt="Featured Mars Image">
+                <img src="{{listings.featured_image_url}}" alt="Featured Mars Image" width="450">
             </div>
             <div class="col-md-3">
                 <h2>Mars Weather</h2>
-                <p>{{ mars_weather }}</p>
+                <p>{{ listings.mars_weather }}</p>
             </div>
             <div class="col-md-3">
-            {{ mars_facts }}
+                <h2>Mars Facts</h2>
+                {{ listings.mars_facts|safe}}
             </div>
         </div>
         <div class="row" id="even-more-mars-cruft">
-            { for image in {hemisphere_image_urls} }
+            {% for image in listings.hemisphere_image_urls %}
             <div class="col-md-12">
-                <img src="{{image}}" alt="hemisphere photo">
+                <p>{{image.title}}</p>
+                <img src="{{image.img_url}}" alt="hemisphere photo">
             </div>
+            {% endfor %}
         </div>
     </div>
 </body>

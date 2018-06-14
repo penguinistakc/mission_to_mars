@@ -13,11 +13,16 @@ def mars_news():
     browser = init_browser()
     news_url = 'https://mars.nasa.gov/news'  
     browser.visit(news_url)
+#    html = browser.html
+#    soup = bs(html, 'html.parser')
+#    something=soup.select_one("div.content_title").find("a")
+#    print(something)
+    browser.find_by_name('content_title')
     browser.click_link_by_partial_href('news/')
     html = browser.html
     soup = bs(html, 'html.parser')
     news_title = soup.select_one('h1.article_title').text
-    news_p = soup.select_one('div.wysiwyg_content').find('p').text
+    news_p = soup.select_one('div.wysiwyg_content').text
     return news_title, news_p
 
 

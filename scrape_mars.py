@@ -1,24 +1,7 @@
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import pandas as pd
-import pymongo
-
-
-def init_mongod():
-    """Initialize MongoDB db services
-    returns: Mongod instance
-    """
-    conn = 'mongodb://localhost:27017'
-    return pymongo.MongoClient(conn)
-
-
-def define_mongo_db(client):
-    """set up default mongo database
-    requires: mongo client connection
-    returns: mongod database and mars collection
-    """
-    db = client.mars_db
-    return db.mars
+from collections import OrderedDict
 
 
 def init_browser():
@@ -30,11 +13,16 @@ def mars_news():
     browser = init_browser()
     news_url = 'https://mars.nasa.gov/news'  
     browser.visit(news_url)
+#    html = browser.html
+#    soup = bs(html, 'html.parser')
+#    something=soup.select_one("div.content_title").find("a")
+#    print(something)
+    browser.find_by_name('content_title')
     browser.click_link_by_partial_href('news/')
     html = browser.html
     soup = bs(html, 'html.parser')
     news_title = soup.select_one('h1.article_title').text
-    news_p = soup.select_one('div.wysiwyg_content').find('p').text
+    news_p = soup.select_one('div.wysiwyg_content').text
     return news_title, news_p
 
 
@@ -81,8 +69,9 @@ def mars_hemisphere_images():
         browser.visit(hem_url)
         browser.click_link_by_partial_text(image)
         page_title = browser.title
-        browser.click_link_by_text('Sample')
-        page_url = browser.url
+        mhi_html = browser.html
+        mhi_soup = bs(mhi_html, 'html.parser')
+        page_url = mhi_soup.select_one("div.downloads").ul.li.a['href']
         hem_image_data = {
             'title': page_title,
             'img_url': page_url
@@ -92,15 +81,15 @@ def mars_hemisphere_images():
 
 
 def scrape():
-    client = init_mongod()
-    client.mars_db.mars.drop()
-    collection = define_mongo_db(client)
     news_title, news_p = mars_news()
-    collection.insert_one({"news_title": news_title, "news_p": news_p})
-    collection.insert_one({"featured_image_url": mars_space_image()})
-    collection.insert_one({"mars_weather": mars_weather_tweet()})
-    collection.insert_one({"mars_facts": mars_facts()})
-    collection.insert_one({"mars_hemisphere_images": mars_hemisphere_images()})
+    return {
+        'news_title': news_title,
+        'news_p': news_p,
+        'featured_image_url': mars_space_image(),
+        'mars_weather': mars_weather_tweet(),
+        'mars_facts': mars_facts(),
+        'hemisphere_image_urls': mars_hemisphere_images()
+    }
 
 
 if __name__ == '__main__':

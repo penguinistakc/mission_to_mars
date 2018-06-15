@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission to Mars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+
+        <div class="jumbotron text-center">
+          <h1>Mission to Mars</h1>
+          <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape the Hell out of Mars</a></p>
+        </div>
+
+        <!-- Mars cruft -->
+        <div class="row" id="mars-news">
+          <div class="col-md-12">
+            <h2 class="heading">{{listings.news_title}}</h2>
+            <p>{{listings.news_p}}</p>
+          </div>
+        </div>
+        <div class="row" id="more-mars-cruft">
+            <div class="col-md-6">
+                <h2>Featured Mars Image</h2>
+                <img src="{{listings.featured_image_url}}" alt="Featured Mars Image" width="450">
+            </div>
+            <div class="col-md-3">
+                <h2>Mars Weather</h2>
+                <p>{{ listings.mars_weather }}</p>
+            </div>
+            <div class="col-md-3">
+                <h2>Mars Facts</h2>
+                {{ listings.mars_facts|safe}}
+            </div>
+        </div>
+        <div class="row" id="even-more-mars-cruft">
+            <div class="col-md-6">
+                <h1>{{listings.hemisphere_image_urls[0].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[0].img_url}}" alt="hemisphere photo" width="450">
+            </div>
+            <div class="col-md-6">
+                               <h1>{{listings.hemisphere_image_urls[1].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[1].img_url}}" alt="hemisphere photo" width="450">
+            </div>
+        </div>
+        <div class="row" id="even-more-mars-cruft-2">
+            <div class="col-md-6">
+                <h1>{{listings.hemisphere_image_urls[2].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[2].img_url}}" alt="hemisphere photo" width="450">
+            </div>
+            <div class="col-md-6">
+                <h1>{{listings.hemisphere_image_urls[3].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[3].img_url}}" alt="hemisphere photo" width="450">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

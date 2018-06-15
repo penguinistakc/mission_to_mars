@@ -69,8 +69,9 @@ def mars_hemisphere_images():
         browser.visit(hem_url)
         browser.click_link_by_partial_text(image)
         page_title = browser.title
-        browser.click_link_by_text('Sample')
-        page_url = browser.url
+        mhi_html = browser.html
+        mhi_soup = bs(mhi_html, 'html.parser')
+        page_url = mhi_soup.select_one("div.downloads").ul.li.a['href']
         hem_image_data = {
             'title': page_title,
             'img_url': page_url

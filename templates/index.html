@@ -37,12 +37,24 @@
             </div>
         </div>
         <div class="row" id="even-more-mars-cruft">
-            {% for image in listings.hemisphere_image_urls %}
-            <div class="col-md-12">
-                <p>{{image.title}}</p>
-                <img src="{{image.img_url}}" alt="hemisphere photo">
+            <div class="col-md-6">
+                <h1>{{listings.hemisphere_image_urls[0].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[0].img_url}}" alt="hemisphere photo" width="450">
             </div>
-            {% endfor %}
+            <div class="col-md-6">
+                               <h1>{{listings.hemisphere_image_urls[1].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[1].img_url}}" alt="hemisphere photo" width="450">
+            </div>
+        </div>
+        <div class="row" id="even-more-mars-cruft-2">
+            <div class="col-md-6">
+                <h1>{{listings.hemisphere_image_urls[2].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[2].img_url}}" alt="hemisphere photo" width="450">
+            </div>
+            <div class="col-md-6">
+                <h1>{{listings.hemisphere_image_urls[3].title}}</h1>
+                <img src="{{listings.hemisphere_image_urls[3].img_url}}" alt="hemisphere photo" width="450">
+            </div>
         </div>
     </div>
 </body>

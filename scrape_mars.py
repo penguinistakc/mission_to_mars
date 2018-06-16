@@ -1,7 +1,6 @@
 from bs4 import BeautifulSoup as bs
 from splinter import Browser
 import pandas as pd
-from collections import OrderedDict
 
 
 def init_browser():

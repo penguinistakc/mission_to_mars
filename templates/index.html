@@ -9,7 +9,6 @@
 </head>
 <body>
     <div class="container">
-
         <div class="jumbotron text-center">
           <h1>Mission to Mars</h1>
           <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape Mars</a></p>
@@ -29,11 +28,11 @@
             </div>
             <div class="col-md-3">
                 <h2>Mars Weather</h2>
-                <p>{{ listings.mars_weather }}</p>
+                <p>{{listings.mars_weather}}</p>
             </div>
             <div class="col-md-3">
                 <h2>Mars Facts</h2>
-                {{ listings.mars_facts|safe}}
+                {{listings.mars_facts|safe}}
             </div>
         </div>
         <div class="row" id="even-more-mars-cruft">

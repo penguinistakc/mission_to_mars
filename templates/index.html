@@ -21,6 +21,7 @@
             <p>{{listings.news_p}}</p>
           </div>
         </div>
+        {% if listings is not none %}}
         <div class="row" id="more-mars-cruft">
             <div class="col-md-6">
                 <h2>Featured Mars Image</h2>
@@ -55,6 +56,10 @@
                 <img src="{{listings.hemisphere_image_urls[3].img_url}}" alt="hemisphere photo" width="450">
             </div>
         </div>
+        {% else %}
+        <div class = "row" id = "what-we-do-when-there-is-no-data">
+        </div>
+        {% endif %}
     </div>
 </body>
 </html>
